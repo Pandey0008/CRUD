@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { backendUrl } from '../config/fetch'
 function UserDetails() {
     const navigate = useNavigate()
     const [users, setUsers] = useState(null)
     const [error, setError] = useState('')
     const fetchUser = async () => {
-        const response = await fetch(`http://localhost:3000/api/users/`)
+        const response = await fetch(`${backendUrl}/`)
         const data = await response.json()
         setUsers(data)
         if(!response.ok){
@@ -16,7 +17,7 @@ function UserDetails() {
         }
     }
     const handleDelete = async(_id) => {
-        const response = await fetch(`http://localhost:3000/api/users/${_id}`, {
+        const response = await fetch(`${backendUrl}/${_id}`, {
             method: 'DELETE'
         })
         const data = await response.json()

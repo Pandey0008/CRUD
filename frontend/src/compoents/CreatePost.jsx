@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { backendUrl } from '../config/fetch'
 
 function CreatePost() {
     const [name, setName] = useState('')
@@ -9,8 +10,8 @@ function CreatePost() {
     const navigate = useNavigate()
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const data = {name, email, age}
-        const response = await fetch('http://localhost:3000/api/users/create', {
+        const data = {name, email, age  }
+        const response = await fetch(`${backendUrl}/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { backendUrl } from '../config/fetch'
 
 function EditPost() {
     const navigate = useNavigate()
@@ -11,7 +12,7 @@ function EditPost() {
 
     const fetchUser = async() => {
        
-        const response = await fetch(`http://localhost:3000/api/users/${id}`)
+        const response = await fetch(`${backendUrl}/${id}`)
         const result = await response.json()
         if(!response.ok){
             console.log(result.message);
@@ -35,7 +36,7 @@ function EditPost() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         const data = {name, email, age}
-        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+        const response = await fetch(`${backendUrl}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
