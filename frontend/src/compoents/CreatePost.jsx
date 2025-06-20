@@ -10,8 +10,8 @@ function CreatePost() {
     const navigate = useNavigate()
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const data = {name, email, age  }
-        const response = await fetch(`${backendUrl}/create`, {
+        const data = {name, email, age}
+        const response = await fetch(`${backendUrl}/api/users/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

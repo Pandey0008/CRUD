@@ -6,7 +6,7 @@ function UserDetails() {
     const [users, setUsers] = useState(null)
     const [error, setError] = useState('')
     const fetchUser = async () => {
-        const response = await fetch(`${backendUrl}/`)
+        const response = await fetch(`${backendUrl}/api/users/`)
         const data = await response.json()
         setUsers(data)
         if(!response.ok){
@@ -17,7 +17,7 @@ function UserDetails() {
         }
     }
     const handleDelete = async(_id) => {
-        const response = await fetch(`${backendUrl}/${_id}`, {
+        const response = await fetch(`${backendUrl}/api/users/${_id}`, {
             method: 'DELETE'
         })
         const data = await response.json()

@@ -12,7 +12,7 @@ function EditPost() {
 
     const fetchUser = async() => {
        
-        const response = await fetch(`${backendUrl}/${id}`)
+        const response = await fetch(`${backendUrl}/api/users/${id}`)
         const result = await response.json()
         if(!response.ok){
             console.log(result.message);
@@ -36,7 +36,7 @@ function EditPost() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         const data = {name, email, age}
-        const response = await fetch(`${backendUrl}/${id}`, {
+        const response = await fetch(`${backendUrl}/api/users/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
