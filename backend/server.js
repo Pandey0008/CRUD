@@ -7,15 +7,20 @@ const cors = require("cors");
 
 connectDB();
 
-app.use((req, res, next) => {
-    console.log('Request Origin:', req.headers.origin);
-    next();
-});
-
 console.log('Allowed frontend URL from env:', process.env.FRONTEND_URL);
 
 app.use(cors({
-    origin: [process.env.FRONTEND_URL, "http://localhost:5173"],
+    origin: function (origin, callback) {
+        console.log(`CORS middleware received origin: ${origin}`);
+        const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"];
+        if (!origin || allowedOrigins.includes(origin)) {
+            console.log(`Origin ${origin} is allowed.`);
+            callback(null, true);
+        } else {
+            console.error(`Origin ${origin} not allowed by CORS policy.`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 }));
 
